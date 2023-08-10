@@ -1,3 +1,10 @@
+/*
+
+Compile:
+vcs +libext+.sv -sv -y .. ../mat_transpose.sv -debug_access+all -sverilog -timescale=1ns/1ps -kdb -lca
+
+*/
+
 module mat_transpose #(
     parameter NUM_ROWS = 1,
     parameter NUM_COLS = 1,
