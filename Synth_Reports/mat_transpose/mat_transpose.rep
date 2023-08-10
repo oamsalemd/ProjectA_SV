@@ -1,0 +1,121 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 1
+Design : mat_transpose
+Version: N-2017.09-SP3
+Date   : Thu Aug 10 12:24:10 2023
+****************************************
+
+Operating Conditions: tsl18fs120_typ   Library: tsl18fs120_typ
+Wire Load Model Mode: enclosed
+
+  Startpoint: mat_in[98303]
+              (input port)
+  Endpoint: mat_out[98303]
+            (output port)
+  Path Group: (none)
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  mat_transpose      ForQA                 tsl18fs120_typ
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  input external delay                     0.00       0.00 f
+  mat_in[98303] (in)                       0.04       0.04 f
+  mat_out[98303] (out)                     0.00       0.04 f
+  data arrival time                                   0.04
+  -----------------------------------------------------------
+  (Path is unconstrained)
+
+
+1
+ 
+****************************************
+Report : timing
+        -path full
+        -delay min
+        -max_paths 1
+Design : mat_transpose
+Version: N-2017.09-SP3
+Date   : Thu Aug 10 12:24:10 2023
+****************************************
+
+Operating Conditions: tsl18fs120_typ   Library: tsl18fs120_typ
+Wire Load Model Mode: enclosed
+
+  Startpoint: mat_in[98303]
+              (input port)
+  Endpoint: mat_out[98303]
+            (output port)
+  Path Group: (none)
+  Path Type: min
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  mat_transpose      ForQA                 tsl18fs120_typ
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  input external delay                     0.00       0.00 r
+  mat_in[98303] (in)                       0.04       0.04 r
+  mat_out[98303] (out)                     0.00       0.04 r
+  data arrival time                                   0.04
+  -----------------------------------------------------------
+  (Path is unconstrained)
+
+
+1
+ 
+****************************************
+Report : area
+Design : mat_transpose
+Version: N-2017.09-SP3
+Date   : Thu Aug 10 12:24:10 2023
+****************************************
+
+Library(s) Used:
+
+    No libraries used.
+
+Number of ports:                       196608
+Number of nets:                         98304
+Number of cells:                            0
+Number of combinational cells:              0
+Number of sequential cells:                 0
+Number of macros/black boxes:               0
+Number of buf/inv:                          0
+Number of references:                       0
+
+Combinational area:                  0.000000
+Buf/Inv area:                        0.000000
+Noncombinational area:               0.000000
+Macro/Black Box area:                0.000000
+Net Interconnect area:           20250.624023
+
+Total cell area:                     0.000000
+Total area:                      20250.624023
+1
+ 
+****************************************
+Report : constraint
+        -all_violators
+Design : mat_transpose
+Version: N-2017.09-SP3
+Date   : Thu Aug 10 12:24:10 2023
+****************************************
+
+
+   max_area
+
+                             Required        Actual
+   Design                      Area           Area           Slack
+   -----------------------------------------------------------------
+   mat_transpose             2000.00       20250.62       -18250.62 (VIOLATED)
+
+
+1

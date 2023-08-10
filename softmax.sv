@@ -17,7 +17,7 @@ vcs +libext+.sv -sv -y .. ../softmax.sv -debug_access+all -sverilog -timescale=1
 */
 
 module softmax #(
-    parameter VEC_SIZE = 1,
+    parameter VEC_SIZE = 107,
     parameter DATA_WIDTH = 16,
     parameter FIXED_PNT = 8
     ) (

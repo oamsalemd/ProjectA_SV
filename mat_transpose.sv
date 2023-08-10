@@ -6,8 +6,8 @@ vcs +libext+.sv -sv -y .. ../mat_transpose.sv -debug_access+all -sverilog -times
 */
 
 module mat_transpose #(
-    parameter NUM_ROWS = 1,
-    parameter NUM_COLS = 1,
+    parameter NUM_ROWS = 64,
+    parameter NUM_COLS = 96,
     parameter DATA_WIDTH = 16,
     parameter FIXED_PNT = 8)
 (

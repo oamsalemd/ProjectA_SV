@@ -6,7 +6,7 @@ vcs +libext+.sv -sv -y .. ../relu.sv -debug_access+all -sverilog -timescale=1ns/
 */
 
 module relu #(
-    parameter VEC_SIZE = 1,
+    parameter VEC_SIZE = 64,
     parameter DATA_WIDTH = 16,
     parameter FIXED_PNT = 8)
 (

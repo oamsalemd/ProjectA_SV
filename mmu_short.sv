@@ -15,9 +15,9 @@ vcs +libext+.sv -sv -y .. ../mmu_short.sv -debug_access+all -sverilog -timescale
 */
 
 module mmu_short #(
-    parameter NUM_ROWS_A = 1,
-    parameter NUM_COLS_A = 1, // NUM_ROWS_B
-    parameter NUM_COLS_B = 1,
+    parameter NUM_ROWS_A = 4,
+    parameter NUM_COLS_A = 4, // NUM_ROWS_B
+    parameter NUM_COLS_B = 4,
     parameter DATA_WIDTH = 16,
     parameter FIXED_PNT = 8
 ) (
