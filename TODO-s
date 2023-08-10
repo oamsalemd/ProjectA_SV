@@ -1,7 +1,7 @@
-1. Provide Goel with elaborated documents about each sub-block
+TODO-s:
+* Provide Goel with elaborated documents about each sub-block
     -> Motivation
     -> Interface
     -> Operation (high-level)
-2. Compile all sub-blocks and fix syntax
-3. Begin to estimate throughput/latency of the total pipe based on sub-blocks.
-    -> Maybe work up some Python-based parametric simulator (?)
+* Begin to estimate throughput/latency of the total pipe based on sub-blocks.
+    -> Continue improving the Excel cycle-simulation
