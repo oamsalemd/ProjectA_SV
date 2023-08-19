@@ -49,16 +49,19 @@ module mmu_long #(
     always_ff @(posedge clk or negedge rst_n) begin
         if (~rst_n) counter_col_a <= {NUM_COLS_A{1'b0}};
         else if (enable_d) counter_col_a <= done_col_a ? {NUM_COLS_A{1'b0}} : counter_col_a + 1'b1;
+        else if (enable_d & ~enable) counter_col_a <= {NUM_COLS_A{1'b0}};
     end
 
     always_ff @(posedge clk or negedge rst_n) begin
         if (~rst_n) counter_row_a <= {NUM_ROWS_A{1'b0}};
         else if (enable_d && done_col_a) counter_row_a <= done_row_a ? {NUM_ROWS_A{1'b0}} : counter_row_a + 1'b1;
+        else if (enable_d & ~enable) counter_row_a <= {NUM_ROWS_A{1'b0}};
     end
 
     always_ff @(posedge clk or negedge rst_n) begin
         if (~rst_n) counter_col_b <= {NUM_COLS_B{1'b0}};
         else if (enable_d && done_row_a) counter_col_b <= done_col_b ? {NUM_COLS_B{1'b0}} : counter_col_b + 1'b1;
+        else if (enable_d & ~enable) counter_col_b <= {NUM_COLS_B{1'b0}};
     end
 
     assign gated_num1 = enable ? mat_in1[counter_row_a][counter_col_a] : {DATA_WIDTH{1'b0}};
