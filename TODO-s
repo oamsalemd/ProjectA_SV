@@ -1,7 +1,9 @@
 TODO-s:
-* Provide Goel with elaborated documents about each sub-block
-    -> Motivation
-    -> Interface
-    -> Operation (high-level)
-* Begin to estimate throughput/latency of the total pipe based on sub-blocks.
-    -> Continue improving the Excel cycle-simulation
+===
+    1. Complete simulating block-level
+    2. Generate more area reports for different configurations
+    3. Complete explanations for "basic-blocks" chapter
+===
+    1. Complete explanations for Excel simulation
+    2. Present graphic results for "parameter sweep"
+    3. Complete explanations for other chapters (Memory,
