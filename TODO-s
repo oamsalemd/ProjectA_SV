@@ -1,7 +1,6 @@
 TODO-s:
 ===
     2. Extract area reports for MMU, RELU, MULT, ADDER
-    6. Wavedrome for EXP, SOFTMAX
 
     3. Show graph/numbers for Excel sweeps
     5. Visio for EXP, SOFTMAX

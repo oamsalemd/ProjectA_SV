@@ -74,6 +74,7 @@ module exp #(
 
     logic [DATA_WIDTH-1:0] adder_result;
     logic [DATA_WIDTH-1:0] adder_bin_result;
+    logic [DATA_WIDTH-1:0] adder_bin_result_plus_one;
 
     logic [DATA_WIDTH-1:0] div_result;
 
@@ -101,7 +102,7 @@ module exp #(
 
     logic [DATA_WIDTH-1:0] num1;
     logic [DATA_WIDTH-1:0] num2;
-    assign num1 = taylor_counter_done ? base_bin_start_exp : num - BIN_START[bin_sel];
+    assign num1 = taylor_counter_done ? base_bin_start_exp : adder_bin_result;
     assign num2 = taylor_counter_done ? exp_num : mult_result_reg;
 
     // mult instance:
@@ -118,7 +119,7 @@ module exp #(
 
     always_ff @(posedge clk or negedge rst_n) begin
         if (~rst_n) mult_result_reg <= {{DATA_WIDTH-FIXED_PNT-1{1'b0}},1'b1,{FIXED_PNT{1'b0}}};
-        else if (enable & ~enable_d) mult_result_reg <= num - BIN_START[bin_sel];
+        else if (enable & ~enable_d) mult_result_reg <= adder_bin_result;
         else if (enable && ~taylor_counter_done) mult_result_reg <= mult_result;
     end
 
@@ -150,18 +151,30 @@ module exp #(
 
     adder #(
         .DATA_WIDTH(DATA_WIDTH),
-        .FIXED_PNT(FIXED_PNT))
+        .FIXED_PNT(FIXED_PNT),
+        .IS_REDUCED(1))
     adder_bin_inst (
-        .num1((1'b1 << FIXED_PNT) - BIN_START[bin_sel]),
-        .num2(num),
+        .num1(num),
+        .num2(BIN_START[bin_sel]),
         .sum(adder_bin_result),
+        .overflow(),
+        .underflow()
+    );
+
+    adder #(
+        .DATA_WIDTH(DATA_WIDTH),
+        .FIXED_PNT(FIXED_PNT))
+    adder_bin_inst_plus_one (
+        .num1(adder_bin_result),
+        .num2({{DATA_WIDTH-FIXED_PNT-1{1'b0}},1'b1,{FIXED_PNT{1'b0}}}),
+        .sum(adder_bin_result_plus_one),
         .overflow(),
         .underflow()
     );
 
     always_ff @(posedge clk or negedge rst_n) begin
         if (~rst_n) exp_num <= '0;
-        else if (enable & ~enable_d) exp_num <= adder_bin_result;
+        else if (enable & ~enable_d) exp_num <= adder_bin_result_plus_one;
         else if (enable_d && ~taylor_counter_done) exp_num <= adder_result;
 
         // last cycle is to multiply result in base_bin_start_exp:
