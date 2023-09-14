@@ -34,20 +34,20 @@ module mmu_short #(
     logic [DATA_WIDTH-1:0] mat_mul_temp [NUM_ROWS_A][NUM_COLS_B][NUM_COLS_A];
     logic enable_d, enable_dd, enable_ddd;
 
+    //logic signed [DATA_WIDTH-1:0] mat_in1_gated [NUM_ROWS_A][NUM_COLS_A];
+    //logic signed [DATA_WIDTH-1:0] mat_in2_gated [NUM_COLS_A][NUM_COLS_B];
+
     // Combo for multiplication:
     generate
         for (genvar i = 0; i < NUM_ROWS_A; i = i + 1) begin: row_a
             for (genvar j = 0; j < NUM_COLS_B; j = j +1) begin: col_b
                 for (genvar k = 0; k < NUM_COLS_A; k = k + 1) begin: col_a
-                    logic signed [DATA_WIDTH-1:0] mat_in1_gated [NUM_ROWS_A][NUM_COLS_A];
-                    assign mat_in1_gated[i][k] = enable ? mat_in1[i][k] : '{default:0};
-
-                    logic signed [DATA_WIDTH-1:0] mat_in2_gated [NUM_COLS_A][NUM_COLS_B];
-                    assign mat_in2_gated[k][j] = enable ? mat_in2[k][j] : '{default:0};
+                    //assign mat_in1_gated[i][k] = enable ? mat_in1[i][k] : '{default:0};
+                    //assign mat_in2_gated[k][j] = enable ? mat_in2[k][j] : '{default:0};
 
                     mult #(DATA_WIDTH, FIXED_PNT) mult_inst (
-                        .num1(mat_in1_gated[i][k]),
-                        .num2(mat_in2_gated[k][j]),
+                        .num1(mat_in1[i][k]),
+                        .num2(mat_in2[k][j]),
                         .product(mat_mul_temp[i][j][k]),
                         .overflow(),
                         .underflow()
@@ -61,7 +61,7 @@ module mmu_short #(
     logic [DATA_WIDTH-1:0] mat_mul_temp_reg [NUM_ROWS_A][NUM_COLS_B][NUM_COLS_A];
     always_ff @(posedge clk or negedge rst_n) begin
         if (~rst_n) mat_mul_temp_reg <= '{default:0};
-        else if (enable_d) mat_mul_temp_reg <= mat_mul_temp;
+        else if (enable) mat_mul_temp_reg <= mat_mul_temp;
     end
 
     // Per output cell:
@@ -93,7 +93,7 @@ module mmu_short #(
                 // Synchronous for chain adders:
                 always_ff @(posedge clk or negedge rst_n) begin
                     if (~rst_n) mat_out[r][s] <= '{default:0};
-                    else if (enable_dd)  mat_out[r][s] <= adders_chain_result[NUM_COLS_A-1];
+                    else if (enable_d)  mat_out[r][s] <= adders_chain_result[NUM_COLS_A-1];
                 end
             end
         end
