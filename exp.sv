@@ -116,7 +116,7 @@ module exp #(
     );
 
     always_ff @(posedge clk or negedge rst_n) begin
-        if (~rst_n) mult_result_reg <= {{DATA_WIDTH-1{1'b0}},1'b1};
+        if (~rst_n) mult_result_reg <= {{DATA_WIDTH-FIXED_PNT-1{1'b0}},1'b1,{FIXED_PNT{1'b0}}};
         else if (enable & ~enable_d) mult_result_reg <= num - BIN_START[bin_sel];
         else if (enable && ~taylor_counter_done) mult_result_reg <= mult_result;
     end

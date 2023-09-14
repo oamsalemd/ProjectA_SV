@@ -1,9 +1,9 @@
 TODO-s:
 ===
-    1. Complete simulating block-level
-    2. Generate more area reports for different configurations
-    3. Complete explanations for "basic-blocks" chapter
-===
-    1. Complete explanations for Excel simulation
-    2. Present graphic results for "parameter sweep"
-    3. Complete explanations for other chapters (Memory,
+    2. Extract area reports for MMU, RELU, MULT, ADDER
+    6. Wavedrome for EXP, SOFTMAX
+
+    3. Show graph/numbers for Excel sweeps
+    5. Visio for EXP, SOFTMAX
+    7. Complete Memory constraints
+    4. A chapter describing the entire Excel
