@@ -73,6 +73,7 @@ module exp #(
     logic [DATA_WIDTH-1:0] mult_result_reg;
 
     logic [DATA_WIDTH-1:0] adder_result;
+    logic [DATA_WIDTH-1:0] adder_bin_result;
 
     logic [DATA_WIDTH-1:0] div_result;
 
@@ -147,9 +148,20 @@ module exp #(
         .underflow()
     );
 
+    adder #(
+        .DATA_WIDTH(DATA_WIDTH),
+        .FIXED_PNT(FIXED_PNT))
+    adder_bin_inst (
+        .num1((1'b1 << FIXED_PNT) - BIN_START[bin_sel]),
+        .num2(num),
+        .sum(adder_bin_result),
+        .overflow(),
+        .underflow()
+    );
+
     always_ff @(posedge clk or negedge rst_n) begin
         if (~rst_n) exp_num <= '0;
-        else if (enable & ~enable_d) exp_num <= 1'b1 + num - BIN_START[bin_sel];
+        else if (enable & ~enable_d) exp_num <= adder_bin_result;
         else if (enable_d && ~taylor_counter_done) exp_num <= adder_result;
 
         // last cycle is to multiply result in base_bin_start_exp:
