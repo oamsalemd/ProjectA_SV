@@ -1,8 +1,6 @@
 TODO-s:
 ===
-    2. Extract area reports for MMU, RELU, MULT, ADDER
-
-    3. Show graph/numbers for Excel sweeps
-    5. Visio for EXP, SOFTMAX
-    7. Complete Memory constraints
-    4. A chapter describing the entire Excel
+    3. Show graph/numbers for Excel "sweeps"
+    5. Visio-s for EXP, SOFTMAX
+    7. Complete Memory bandwidth constraints in Excel
+    4. Appendix chapter describing the entire Excel
